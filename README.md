@@ -18,4 +18,8 @@ pip install -r requirements.txt
 python3 manage.py runserver
 ```
 ### Авторы
+<<<<<<< HEAD
 Гапочкин Иван
+=======
+Гапочкин Иван
+>>>>>>> 2298a645de86affae6699af3a4a2ee40ceba819f
