@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru"> 
+  {% block title %}
+  Пост {{title}}
+  {% endblock %}
   <head>  
     <title>Профайл пользователя {{ author }}</title>
   </head>
+  {% block content %}
   <body>       
     <header>
       <nav class="navbar navbar-light" style="background-color: lightskyblue">
@@ -46,4 +50,5 @@
       <p>© <!--2021 --> Copyright <span style="color:red">Ya</span>tube</p>    
     </footer>
   </body>
+  {% endblock %}
 </html> 
