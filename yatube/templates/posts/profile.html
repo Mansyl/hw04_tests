@@ -1,28 +1,18 @@
-<!DOCTYPE html>
-<html lang="ru"> 
-  {% block title %}
+{% extends "base.html" %}
+{% block title %}
   Пост {{title}}
-  {% endblock %}
+{% endblock %}
   <head>  
     <title>Профайл пользователя {{ author }}</title>
   </head>
-  {% block content %}
+{% block content %}
   <body>       
-    <header>
-      <nav class="navbar navbar-light" style="background-color: lightskyblue">
-        <div class="container">
-          <a class="navbar-brand" href="/">
-            <img src="/static/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-            <span style="color:red">Ya</span>tube
-          </a>
-        </div>
-      </nav>      
-    </header>
     <main>
+      <h1>Все посты пользователя {{ author }} </h1>
+      <h3>Всего постов: {{ author.posts.count }} </h3>
       {% for post in page_obj %}
       <div class="container py-5">        
-        <h1>Все посты пользователя {{ author }} </h1>
-        <h3>Всего постов: {{ author.posts.count }} </h3>   
+         
         <article>
           <ul>
             <li>
@@ -42,13 +32,10 @@
         {% endif %}      
         <hr>
         <!-- Остальные посты. после последнего нет черты -->
-        {% include 'includes/paginator.html' %}
+        
       </div>
       {% endfor %}
     </main>
-    <footer class="border-top text-center py-3">
-      <p>© <!--2021 --> Copyright <span style="color:red">Ya</span>tube</p>    
-    </footer>
+    {% include 'includes/paginator.html' %}
   </body>
-  {% endblock %}
-</html> 
+{% endblock %}  
