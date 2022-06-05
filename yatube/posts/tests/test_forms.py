@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.test import Client, TestCase
 from django.urls import reverse
+from http import HTTPStatus
 from posts.models import Group, Post
 
 User = get_user_model()
@@ -57,13 +58,13 @@ class PostCreateFormTests(TestCase):
             'text': 'Пост от неавторизованного пользователя',
             'group': self.group.id
         }
+        tasks_count = Post.objects.count()
         self.guest_client.post(
             reverse('posts:create'),
             data=form_data,
             follow=True,
         )
-        self.assertFalse(Post.objects.filter(
-            text='Пост от неавторизованного пользователя').exists())
+        self.assertNotEqual(Post.objects.count(), tasks_count+1)
 
     def test_authorized_edit_post(self):
         # авторизованный может редактировать
@@ -91,5 +92,5 @@ class PostCreateFormTests(TestCase):
             follow=True,
         )
         post_2 = Post.objects.get(id=self.group.id)
-        self.assertEqual(response_edit.status_code, 200)
+        self.assertEqual(response_edit.status_code, HTTPStatus.OK)
         self.assertEqual(post_2.text, 'Измененный текст')
