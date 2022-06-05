@@ -64,7 +64,7 @@ class PostCreateFormTests(TestCase):
             data=form_data,
             follow=True,
         )
-        self.assertNotEqual(Post.objects.count(), tasks_count+1)
+        self.assertNotEqual(Post.objects.count(), tasks_count + 1)
 
     def test_authorized_edit_post(self):
         # авторизованный может редактировать
