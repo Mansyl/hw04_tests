@@ -1,10 +1,7 @@
-from django.contrib.auth import get_user_model
 from django.test import Client, TestCase
 from django.urls import reverse
 from http import HTTPStatus
-from posts.models import Group, Post
-
-User = get_user_model()
+from posts.models import Group, Post, User
 
 
 class PostCreateFormTests(TestCase):
@@ -64,7 +61,7 @@ class PostCreateFormTests(TestCase):
             data=form_data,
             follow=True,
         )
-        self.assertNotEqual(Post.objects.count(), tasks_count + 1)
+        self.assertEqual(Post.objects.count(), tasks_count)
 
     def test_authorized_edit_post(self):
         # авторизованный может редактировать

@@ -17,13 +17,13 @@ class TaskModelTest(TestCase):
         )
         cls.post = Post.objects.create(
             author=cls.user,
-            text='Тестовый пост',
+            text='Тестовый пост, длиной более 15 символов',
         )
 
     def test_models_have_correct_object_names(self):
         """Проверяем, что у моделей корректно работает __str__."""
         post = TaskModelTest.post
-        expected_object_name = post.text
+        expected_object_name = post.text[:15]
         self.assertEqual(expected_object_name, str(post))
 
     def test_verbose_name(self):
